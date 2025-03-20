@@ -413,3 +413,59 @@ footer a:hover {
         padding: 6px 12px;
     }
 }
+
+.policy {
+    max-width: 800px;
+    margin: 40px auto;
+    text-align: left;
+}
+
+.policy h2 {
+    font-size: 1.4em;
+    margin-top: 20px;
+}
+
+.policy p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #b0b0b0;
+}
+
+body.light-theme .policy p {
+    color: #4a4a60;
+}
+
+.policy ul {
+    padding-left: 20px;
+    color: #b0b0b0;
+}
+
+body.light-theme .policy ul {
+    color: #4a4a60;
+}
+
+.policy ul li {
+    margin-bottom: 10px;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .policy {
+        margin: 20px auto;
+    }
+    .policy h2 {
+        font-size: 1.2em;
+    }
+    .policy p {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .policy h2 {
+        font-size: 1.1em;
+    }
+    .policy p {
+        font-size: 0.9em;
+    }
+}
