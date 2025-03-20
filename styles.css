@@ -15,10 +15,13 @@ body.light-theme {
     color: #2e2e45;
 }
 
-h1 {
+header {
     text-align: center;
-    color: #00d4ff;
     margin-bottom: 30px;
+}
+
+h1 {
+    color: #00d4ff;
     font-size: clamp(1.8em, 5vw, 2.5em);
     text-shadow: 0 2px 4px rgba(0, 212, 255, 0.3);
 }
@@ -28,12 +31,23 @@ body.light-theme h1 {
     text-shadow: 0 2px 4px rgba(216, 27, 96, 0.2);
 }
 
+.intro {
+    font-size: 1.2em;
+    color: #b0b0b0;
+    max-width: 800px;
+    margin: 10px auto;
+}
+
+body.light-theme .intro {
+    color: #4a4a60;
+}
+
 .editor-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 0 auto 30px;
 }
 
 .editor {
@@ -263,13 +277,69 @@ body.light-theme .error-message {
     opacity: 1;
 }
 
-/* Медиа-запросы с ещё меньшей кнопкой .theme-toggle */
+.about {
+    max-width: 800px;
+    margin: 40px auto;
+    text-align: left;
+}
+
+.about h2 {
+    text-align: center;
+}
+
+.about p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #b0b0b0;
+}
+
+body.light-theme .about p {
+    color: #4a4a60;
+}
+
+.about ol {
+    padding-left: 20px;
+    color: #b0b0b0;
+}
+
+body.light-theme .about ol {
+    color: #4a4a60;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9em;
+    color: #b0b0b0;
+}
+
+body.light-theme footer {
+    color: #4a4a60;
+}
+
+footer a {
+    color: #00d4ff;
+    text-decoration: none;
+}
+
+body.light-theme footer a {
+    color: #d81b60;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Медиа-запросы */
 @media (max-width: 768px) {
     body {
         padding: 15px;
     }
     h1 {
         margin-bottom: 20px;
+    }
+    .intro {
+        font-size: 1em;
     }
     .editor-container {
         grid-template-columns: 1fr;
@@ -293,11 +363,11 @@ body.light-theme .error-message {
         font-size: 14px;
     }
     .theme-toggle {
-        width: 36px; /* Уменьшено с 40px */
-        height: 36px; /* Уменьшено с 40px */
-        font-size: 18px; /* Уменьшено с 20px */
-        bottom: 12px; /* Слегка сдвинуто ближе к краю */
-        right: 12px; /* Слегка сдвинуто ближе к краю */
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+        bottom: 12px;
+        right: 12px;
     }
     .error-message {
         top: 10px;
@@ -305,11 +375,17 @@ body.light-theme .error-message {
         font-size: 12px;
         padding: 8px 15px;
     }
+    .about {
+        margin: 20px auto;
+    }
 }
 
 @media (max-width: 480px) {
     h1 {
         font-size: 1.5em;
+    }
+    .intro {
+        font-size: 0.9em;
     }
     label {
         font-size: 0.9em;
@@ -326,11 +402,11 @@ body.light-theme .error-message {
         font-size: 12px;
     }
     .theme-toggle {
-        width: 32px; /* Уменьшено с 35px */
-        height: 32px; /* Уменьшено с 35px */
-        font-size: 16px; /* Уменьшено с 18px */
-        bottom: 8px; /* Слегка сдвинуто ближе к краю */
-        right: 8px; /* Слегка сдвинуто ближе к краю */
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+        bottom: 8px;
+        right: 8px;
     }
     .error-message {
         font-size: 11px;
