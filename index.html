@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Онлайн-редактор кода</title>
-    <meta http-equiv="Content-Security-Policy" content="script-src &apos;self&apos; &apos;unsafe-inline&apos; local.adguard.org"/>
-    <script type="text/javascript" nonce="5ce7491d8b0c49a6b7965b556fd" src="//local.adguard.org?ts=1742414710481&amp;type=content-script&amp;dmn=sprutio.beget.com&amp;url=https%3A%2F%2Fsprutio.beget.com%2Factions%2Ffiles%2Fdownload&amp;app=chrome.exe&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-dnt"></script>
-<script type="text/javascript" nonce="5ce7491d8b0c49a6b7965b556fd" src="//local.adguard.org?ts=1742414710481&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script><link rel="stylesheet" href="./styles.css">
+    <title>Zekvora - Онлайн-редактор кода</title>
+    <meta name="description" content="Zekvora - удобный онлайн-редактор для создания и тестирования HTML, CSS и JavaScript в реальном времени.">
+    <meta name="keywords" content="онлайн-редактор кода, HTML редактор, CSS редактор, JavaScript онлайн, Zekvora">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';">
+    <link rel="stylesheet" href="./styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Fira+Code&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Онлайн-редактор кода</h1>
-    <div class="editor-container">
+    <header>
+        <h1>Zekvora - Онлайн-редактор кода</h1>
+        <p class="intro">Создавайте и тестируйте веб-страницы в реальном времени с помощью простого и мощного инструмента.</p>
+    </header>
+
+    <section class="editor-container">
         <div class="editor">
             <label for="htmlInput">HTML</label>
             <textarea id="htmlInput" placeholder="Вставьте HTML сюда..."></textarea>
@@ -24,12 +29,30 @@
             <label for="jsInput">JavaScript</label>
             <textarea id="jsInput" placeholder="Вставьте JS сюда..."></textarea>
         </div>
-    </div>
-    <div class="output-section">
+    </section>
+
+    <section class="output-section">
         <button id="runButton">Показать результат</button>
         <h2>Результат:</h2>
         <iframe id="output" sandbox="allow-scripts allow-same-origin"></iframe>
-    </div>
+    </section>
+
+    <section class="about">
+        <h2>Что такое Zekvora?</h2>
+        <p>Zekvora — это бесплатный онлайн-редактор кода, который позволяет вам писать HTML, CSS и JavaScript прямо в браузере и сразу видеть результат. Идеально подходит для обучения веб-разработке, тестирования идей или быстрого создания прототипов.</p>
+        <h3>Как использовать?</h3>
+        <ol>
+            <li>Введите HTML-код в левую панель.</li>
+            <li>Добавьте стили CSS в среднюю панель.</li>
+            <li>Напишите JavaScript в правую панель.</li>
+            <li>Нажмите "Показать результат", чтобы увидеть, как всё работает!</li>
+        </ol>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Zekvora. Все права защищены. <a href="/privacy-policy.html">Политика конфиденциальности</a></p>
+    </footer>
+
     <button id="themeToggle" class="theme-toggle">☀️</button>
     <div id="error-message" class="error-message"></div>
     <script src="./scripts.js"></script>
