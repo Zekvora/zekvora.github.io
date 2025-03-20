@@ -6,16 +6,70 @@ document.addEventListener('DOMContentLoaded', () => {
     const output = document.getElementById('output');
     const errorMessage = document.getElementById('error-message');
     const themeToggle = document.getElementById('themeToggle');
+    const langRu = document.getElementById('langRu');
+    const langEn = document.getElementById('langEn');
 
+    // Восстановление темы из localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        if (themeToggle) themeToggle.textContent = '🌙';
+    } else {
+        document.body.classList.remove('light-theme');
+        if (themeToggle) themeToggle.textContent = '☀️';
+    }
+
+    // Переключение темы
     if (themeToggle) {
-        // Переключение темы работает на всех страницах
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('light-theme');
             themeToggle.textContent = document.body.classList.contains('light-theme') ? '🌙' : '☀️';
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
         });
     }
 
-    // Логика редактора только для главной страницы
+    // Переключение языка
+    function setLanguage(lang) {
+        document.querySelectorAll('[data-ru][data-en]').forEach(element => {
+            element.textContent = element.getAttribute(`data-${lang}`);
+        });
+        document.documentElement.lang = lang === 'ru' ? 'ru' : 'en';
+
+        // Обновление класса active для кнопок
+        if (lang === 'ru') {
+            langRu.classList.add('active');
+            langEn.classList.remove('active');
+        } else {
+            langEn.classList.add('active');
+            langRu.classList.remove('active');
+        }
+
+        // Обновление плейсхолдеров только для index.html
+        if (htmlInput && cssInput && jsInput) {
+            if (lang === 'ru') {
+                htmlInput.placeholder = 'Вставьте HTML сюда...';
+                cssInput.placeholder = 'Вставьте CSS сюда...';
+                jsInput.placeholder = 'Вставьте JS сюда...';
+            } else {
+                htmlInput.placeholder = 'Paste HTML here...';
+                cssInput.placeholder = 'Paste CSS here...';
+                jsInput.placeholder = 'Paste JS here...';
+            }
+        }
+
+        // Сохранение языка в localStorage
+        localStorage.setItem('language', lang);
+    }
+
+    // Восстановление языка из localStorage
+    const savedLanguage = localStorage.getItem('language') || 'ru'; // По умолчанию 'ru', если ничего не сохранено
+    if (langRu && langEn) {
+        setLanguage(savedLanguage);
+        langRu.addEventListener('click', () => setLanguage('ru'));
+        langEn.addEventListener('click', () => setLanguage('en'));
+    }
+
+    // Логика редактора (только для index.html)
     if (runButton && htmlInput && cssInput && jsInput && output && errorMessage) {
         console.log("Все элементы редактора найдены, скрипт готов");
 
@@ -26,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!html) {
                 console.log("HTML пустой, показываем сообщение об ошибке");
-                errorMessage.textContent = "Вы ничего не ввели в HTML";
+                errorMessage.textContent = document.documentElement.lang === 'ru' ? "Вы ничего не ввели в HTML" : "You didn't enter anything in HTML";
                 errorMessage.classList.add('show');
                 setTimeout(() => {
                     errorMessage.classList.remove('show');
@@ -46,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <style>
                         body {
-                            background: #2e2e45;
+                            background: #2a2a40;
                             color: #e0e0e0;
                             font-family: 'Roboto', sans-serif;
                             margin: 0;
@@ -59,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             height: 10px;
                         }
                         ::-webkit-scrollbar-track {
-                            background: #1a1a2e;
+                            background: #3a3a55;
                             border-radius: 10px;
                         }
                         ::-webkit-scrollbar-thumb {
