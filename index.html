@@ -3,58 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zekvora - Онлайн-редактор кода</title>
+    <title data-ru="Zekvora - Онлайн-редактор кода" data-en="Zekvora - Online Code Editor">Zekvora - Онлайн-редактор кода</title>
     <meta name="description" content="Zekvora - удобный онлайн-редактор для создания и тестирования HTML, CSS и JavaScript в реальном времени.">
     <meta name="keywords" content="онлайн-редактор кода, HTML редактор, CSS редактор, JavaScript онлайн, Zekvora">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';">
     <link rel="stylesheet" href="./styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Fira+Code&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6ZFJ0J13RS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6ZFJ0J13RS');
+</script>
 </head>
 <body>
     <header>
-        <h1>Zekvora - Онлайн-редактор кода</h1>
-        <p class="intro">Создавайте и тестируйте веб-страницы в реальном времени с помощью простого и мощного инструмента.</p>
+        <h1 data-ru="Zekvora - Онлайн-редактор кода" data-en="Zekvora - Online Code Editor">Zekvora - Онлайн-редактор кода</h1>
+        <p class="intro" data-ru="Создавайте и тестируйте веб-страницы в реальном времени с помощью простого и мощного инструмента." data-en="Create and test web pages in real-time with a simple and powerful tool."></p>
+        <div class="language-switcher">
+            <button id="langRu" class="lang-btn active">RU</button>
+            <button id="langEn" class="lang-btn">EN</button>
+        </div>
     </header>
 
     <section class="editor-container">
         <div class="editor">
-            <label for="htmlInput">HTML</label>
+            <label for="htmlInput" data-ru="HTML" data-en="HTML">HTML</label>
             <textarea id="htmlInput" placeholder="Вставьте HTML сюда..."></textarea>
         </div>
         <div class="editor">
-            <label for="cssInput">CSS</label>
+            <label for="cssInput" data-ru="CSS" data-en="CSS">CSS</label>
             <textarea id="cssInput" placeholder="Вставьте CSS сюда..."></textarea>
         </div>
         <div class="editor">
-            <label for="jsInput">JavaScript</label>
+            <label for="jsInput" data-ru="JavaScript" data-en="JavaScript">JavaScript</label>
             <textarea id="jsInput" placeholder="Вставьте JS сюда..."></textarea>
         </div>
     </section>
 
     <section class="output-section">
-        <button id="runButton">Показать результат</button>
-        <h2>Результат:</h2>
+        <button id="runButton" data-ru="Показать результат" data-en="Run Code">Показать результат</button>
+        <h2 data-ru="Результат:" data-en="Result:">Результат:</h2>
         <iframe id="output" sandbox="allow-scripts allow-same-origin"></iframe>
     </section>
 
     <section class="about">
-        <h2>Что такое Zekvora?</h2>
-        <p>Zekvora — это бесплатный онлайн-редактор кода, который позволяет вам писать HTML, CSS и JavaScript прямо в браузере и сразу видеть результат. Идеально подходит для обучения веб-разработке, тестирования идей или быстрого создания прототипов.</p>
-        <h3>Как использовать?</h3>
+        <h2 data-ru="Что такое Zekvora?" data-en="What is Zekvora?">Что такое Zekvora?</h2>
+        <p data-ru="Zekvora — это бесплатный онлайн-редактор кода, который позволяет вам писать HTML, CSS и JavaScript прямо в браузере и сразу видеть результат. Идеально подходит для обучения веб-разработке, тестирования идей или быстрого создания прототипов." data-en="Zekvora is a free online code editor that lets you write HTML, CSS, and JavaScript directly in your browser and see the results instantly. Perfect for learning web development, testing ideas, or quickly building prototypes."></p>
+        <h3 data-ru="Как использовать?" data-en="How to Use?">Как использовать?</h3>
         <ol>
-            <li>Введите HTML-код в левую панель.</li>
-            <li>Добавьте стили CSS в среднюю панель.</li>
-            <li>Напишите JavaScript в правую панель.</li>
-            <li>Нажмите "Показать результат", чтобы увидеть, как всё работает!</li>
+            <li data-ru="Введите HTML-код в левую панель." data-en="Enter HTML code in the left panel."></li>
+            <li data-ru="Добавьте стили CSS в среднюю панель." data-en="Add CSS styles in the middle panel."></li>
+            <li data-ru="Напишите JavaScript в правую панель." data-en="Write JavaScript in the right panel."></li>
+            <li data-ru="Нажмите 'Показать результат', чтобы увидеть, как всё работает!" data-en="Click 'Run Code' to see how it works!"></li>
         </ol>
     </section>
 
     <footer>
-        <p>&copy; 2025 Zekvora. Все права защищены. <a href="/privacy-policy.html">Политика конфиденциальности</a></p>
+        <p><a href="/privacy-policy.html" data-ru="Политика конфиденциальности" data-en="Privacy Policy">Политика конфиденциальности</a> | <span data-ru="© 2025 Zekvora. Все права защищены." data-en="© 2025 Zekvora. All rights reserved.">© 2025 Zekvora. Все права защищены.</span></p>
     </footer>
 
     <button id="themeToggle" class="theme-toggle">☀️</button>
-    <div id="error-message" class="error-message"></div>
-    <script src="./scripts.js"></script>
+    <div id="error-message" class="error-message" data-ru="Вы ничего не ввели в HTML" data-en="You didn't enter anything in HTML"></div>
+    <script defer src="./scripts.js"></script>
 </body>
 </html>

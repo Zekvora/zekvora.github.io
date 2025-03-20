@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://username.github.io/zekvora/</loc>
-    <lastmod>2025-03-20</lastmod>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://username.github.io/zekvora/privacy-policy.html</loc>
-    <lastmod>2025-03-20</lastmod>
-    <priority>0.8</priority>
-  </url>
+    <url>
+        <loc>https://yourdomain.com/index.html</loc>
+        <lastmod>2025-03-20</lastmod>
+        <changefreq>semiannually</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://yourdomain.com/privacy-policy.html</loc>
+        <lastmod>2025-03-20</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
 </urlset>
