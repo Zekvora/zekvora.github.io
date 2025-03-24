@@ -464,3 +464,57 @@ footer a:hover {
         font-size: 0.9em;
     }
 }
+
+/* Стили для блокировки экрана */
+.block-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.block-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Стили для всплывающего окна */
+.block-message {
+    background: #2e2e45;
+    padding: 20px 30px;
+    border-radius: 15px;
+    text-align: center;
+    color: #e0e0e0;
+    max-width: 400px;
+    box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+}
+
+body.light-theme .block-message {
+    background: #f0d8d3;
+    color: #2e2e45;
+    box-shadow: 0 8px 20px rgba(216, 27, 96, 0.2);
+}
+
+.block-message p {
+    margin: 0 0 10px;
+    font-size: 16px;
+}
+
+.block-message .timer {
+    font-size: 18px;
+    font-weight: 500;
+    color: #00d4ff;
+}
+
+body.light-theme .block-message .timer {
+    color: #d81b60;
+}
