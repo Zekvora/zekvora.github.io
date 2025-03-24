@@ -518,3 +518,17 @@ body.light-theme .block-message {
 body.light-theme .block-message .timer {
     color: #d81b60;
 }
+
+.email-link {
+    color: #00d4ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+body.light-theme .email-link {
+    color: #d81b60;
+}
+
+.email-link:hover {
+    text-decoration: underline;
+}
