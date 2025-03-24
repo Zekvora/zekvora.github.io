@@ -50,6 +50,20 @@
         </div>
     </section>
 
+    <section class="media-upload">
+    <h2 data-ru="Загрузка фото" data-en="Upload Photo">Загрузка фото</h2>
+    <div class="media-upload-container">
+        <div class="media-upload-item">
+            <label for="photoInput" data-ru="Фото" data-en="Photo">Фото</label>
+            <input type="file" id="photoInput" accept="image/*" multiple style="display: none;">
+            <button class="small-upload-btn" id="photoUploadBtn" data-ru="Загрузить фото" data-en="Upload Photo">Загрузить фото</button>
+        </div>
+    </div>
+    <div class="media-list" id="mediaList">
+        <!-- Список загруженных файлов -->
+    </div>
+</section>
+
     <section class="output-section">
         <button id="runButton" data-ru="Показать результат" data-en="Run Code">Показать результат</button>
         <h2 data-ru="Результат:" data-en="Result:">Результат:</h2>
