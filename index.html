@@ -39,30 +39,39 @@
         <div class="editor">
             <label for="htmlInput" data-ru="HTML" data-en="HTML">HTML</label>
             <textarea id="htmlInput" placeholder="Вставьте HTML сюда..."></textarea>
+            <div class="editor-upload">
+                <input type="file" id="htmlFileInput" accept="text/html" multiple style="display: none;">
+                <button class="small-upload-btn" id="htmlUploadBtn" data-ru="Загрузить HTML" data-en="Upload HTML">Загрузить HTML</button>
+            </div>
         </div>
         <div class="editor">
             <label for="cssInput" data-ru="CSS" data-en="CSS">CSS</label>
             <textarea id="cssInput" placeholder="Вставьте CSS сюда..."></textarea>
+            <div class="editor-upload">
+                <input type="file" id="cssFileInput" accept="text/css" multiple style="display: none;">
+                <button class="small-upload-btn" id="cssUploadBtn" data-ru="Загрузить в CSS" data-en="Upload to CSS">Загрузить в CSS</button>
+            </div>
         </div>
         <div class="editor">
             <label for="jsInput" data-ru="JavaScript" data-en="JavaScript">JavaScript</label>
             <textarea id="jsInput" placeholder="Вставьте JS сюда..."></textarea>
+            <div class="editor-upload">
+                <input type="file" id="jsFileInput" accept="text/javascript" multiple style="display: none;">
+                <button class="small-upload-btn" id="jsUploadBtn" data-ru="Загрузить в JS" data-en="Upload to JS">Загрузить в JS</button>
+            </div>
         </div>
     </section>
-
+    
     <section class="media-upload">
-    <h2 data-ru="Загрузка фото" data-en="Upload Photo">Загрузка фото</h2>
-    <div class="media-upload-container">
-        <div class="media-upload-item">
-            <label for="photoInput" data-ru="Фото" data-en="Photo">Фото</label>
-            <input type="file" id="photoInput" accept="image/*" multiple style="display: none;">
-            <button class="small-upload-btn" id="photoUploadBtn" data-ru="Загрузить фото" data-en="Upload Photo">Загрузить фото</button>
+        <h2 data-ru="Загруженные файлы" data-en="Uploaded Files">Загруженные файлы</h2>
+        <div class="media-upload-container">
+            <input type="file" id="imageFileInput" accept="image/*" multiple style="display: none;">
+            <button class="small-upload-btn" id="imageUploadBtn" data-ru="Загрузить изображение" data-en="Upload Image">Загрузить изображение</button>
         </div>
-    </div>
-    <div class="media-list" id="mediaList">
-        <!-- Список загруженных файлов -->
-    </div>
-</section>
+        <div class="media-list" id="mediaList">
+            <!-- Список загруженных файлов -->
+        </div>
+    </section>
 
     <section class="output-section">
         <button id="runButton" data-ru="Показать результат" data-en="Run Code">Показать результат</button>
