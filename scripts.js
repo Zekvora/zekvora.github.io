@@ -1,98 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Элементы для блокировки
-    const blockOverlay = document.getElementById('blockOverlay');
-    const blockTimer = document.getElementById('blockTimer');
-
-    // Функция для обновления текста в зависимости от языка
-    function updateBlockMessage() {
-        const lang = localStorage.getItem('language') || 'ru';
-        const message = blockOverlay.querySelector('p');
-        message.textContent = lang === 'ru'
-            ? "Пожалуйста, не обновляйте страницу так часто. Это может навредить работе сайта."
-            : "Please do not refresh the page so often. This may harm the site's performance.";
-    }
-
-    // Проверка блокировки при загрузке страницы
-    const isBlocked = localStorage.getItem('isBlocked') === 'true';
-    const blockEndTime = parseInt(localStorage.getItem('blockEndTime')) || 0;
-    const now = Date.now();
-
-    if (isBlocked && blockEndTime > now) {
-        // Если пользователь заблокирован, показываем оверлей
-        blockOverlay.classList.add('active');
-        updateBlockMessage();
-
-        // Обновляем таймер
-        const remainingTime = Math.ceil((blockEndTime - now) / 1000);
-        blockTimer.textContent = remainingTime;
-
-        const timerInterval = setInterval(() => {
-            const timeLeft = Math.ceil((blockEndTime - Date.now()) / 1000);
-            blockTimer.textContent = timeLeft;
-
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                blockOverlay.classList.remove('active');
-                localStorage.removeItem('isBlocked');
-                localStorage.removeItem('blockEndTime');
-                localStorage.removeItem('refreshCount');
-                localStorage.removeItem('firstRefreshTime');
-            }
-        }, 1000);
-    } else {
-        // Сбрасываем блокировку, если время истекло
-        localStorage.removeItem('isBlocked');
-        localStorage.removeItem('blockEndTime');
-    }
-
-    // Отслеживание обновлений
-    if (!isBlocked) {
-        const refreshCount = parseInt(localStorage.getItem('refreshCount')) || 0;
-        const firstRefreshTime = parseInt(localStorage.getItem('firstRefreshTime')) || now;
-
-        // Обновляем счётчик и время
-        localStorage.setItem('refreshCount', refreshCount + 1);
-        if (refreshCount === 0) {
-            localStorage.setItem('firstRefreshTime', now);
-        }
-
-        // Проверяем, прошло ли 10 секунд
-        const timeElapsed = (now - firstRefreshTime) / 1000; // Время в секундах
-        const currentCount = parseInt(localStorage.getItem('refreshCount'));
-
-        if (timeElapsed <= 10 && currentCount > 15) {
-            // Блокируем пользователя на 30 секунд
-            const blockDuration = 30 * 1000; // 30 секунд в миллисекундах
-            localStorage.setItem('isBlocked', 'true');
-            localStorage.setItem('blockEndTime', now + blockDuration);
-
-            // Показываем оверлей
-            blockOverlay.classList.add('active');
-            updateBlockMessage();
-
-            // Запускаем таймер
-            blockTimer.textContent = 30;
-            const timerInterval = setInterval(() => {
-                const timeLeft = Math.ceil((parseInt(localStorage.getItem('blockEndTime')) - Date.now()) / 1000);
-                blockTimer.textContent = timeLeft;
-
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    blockOverlay.classList.remove('active');
-                    localStorage.removeItem('isBlocked');
-                    localStorage.removeItem('blockEndTime');
-                    localStorage.removeItem('refreshCount');
-                    localStorage.removeItem('firstRefreshTime');
-                }
-            }, 1000);
-        } else if (timeElapsed > 10) {
-            // Сбрасываем счётчик, если прошло больше 10 секунд
-            localStorage.setItem('refreshCount', 1);
-            localStorage.setItem('firstRefreshTime', now);
-        }
-    }
-
-    // Остальной код (переключение темы, языка, редактор и т.д.) остаётся без изменений
+    // Элементы редактора
     const runButton = document.getElementById('runButton');
     const htmlInput = document.getElementById('htmlInput');
     const cssInput = document.getElementById('cssInput');
@@ -103,21 +10,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const langRu = document.getElementById('langRu');
     const langEn = document.getElementById('langEn');
 
-    // ... (остальной код без изменений)
-});
+    // Элементы загрузки файлов
+    const htmlFileInput = document.getElementById('htmlFileInput');
+    const htmlUploadBtn = document.getElementById('htmlUploadBtn');
+    const imageFileInput = document.getElementById('imageFileInput');
+    const imageUploadBtn = document.getElementById('imageUploadBtn');
+    const cssFileInput = document.getElementById('cssFileInput');
+    const cssUploadBtn = document.getElementById('cssUploadBtn');
+    const jsFileInput = document.getElementById('jsFileInput');
+    const jsUploadBtn = document.getElementById('jsUploadBtn');
+    const mediaList = document.getElementById('mediaList');
 
-document.addEventListener('DOMContentLoaded', () => {
-    const runButton = document.getElementById('runButton');
-    const htmlInput = document.getElementById('htmlInput');
-    const cssInput = document.getElementById('cssInput');
-    const jsInput = document.getElementById('jsInput');
-    const output = document.getElementById('output');
-    const errorMessage = document.getElementById('error-message');
-    const themeToggle = document.getElementById('themeToggle');
-    const langRu = document.getElementById('langRu');
-    const langEn = document.getElementById('langEn');
+    // Объект для хранения загруженных файлов и счетчик изображений
+    let uploadedFiles = {};
+    let imageCounter = 0;
 
-    // Восстановление темы из localStorage
+    // Очистка файлов при обновлении страницы
+    window.addEventListener('beforeunload', () => {
+        for (const file of Object.values(uploadedFiles)) {
+            if (file.url) URL.revokeObjectURL(file.url);
+        }
+    });
+
+    // Восстановление темы
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
         document.body.classList.add('light-theme');
@@ -143,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         document.documentElement.lang = lang === 'ru' ? 'ru' : 'en';
 
-        // Обновление класса active для кнопок
         if (lang === 'ru') {
             langRu.classList.add('active');
             langEn.classList.remove('active');
@@ -152,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
             langRu.classList.remove('active');
         }
 
-        // Обновление плейсхолдеров только для index.html
         if (htmlInput && cssInput && jsInput) {
             if (lang === 'ru') {
                 htmlInput.placeholder = 'Вставьте HTML сюда...';
@@ -165,41 +78,122 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Сохранение языка в localStorage
         localStorage.setItem('language', lang);
     }
 
-    // Восстановление языка из localStorage
-    const savedLanguage = localStorage.getItem('language') || 'ru'; // По умолчанию 'ru', если ничего не сохранено
+    const savedLanguage = localStorage.getItem('language') || 'ru';
     if (langRu && langEn) {
         setLanguage(savedLanguage);
         langRu.addEventListener('click', () => setLanguage('ru'));
         langEn.addEventListener('click', () => setLanguage('en'));
     }
 
-    // Логика редактора (только для index.html)
+    // Функция для обработки загрузки файлов
+    function handleFileUpload(input, button, targetTextarea, acceptType, isImage = false) {
+        button.addEventListener('click', () => input.click());
+
+        input.addEventListener('change', () => {
+            const files = Array.from(input.files);
+            files.forEach(file => {
+                const reader = new FileReader();
+                let fileId;
+
+                if (isImage) {
+                    imageCounter++;
+                    fileId = `media://photo-${imageCounter}`;
+                } else {
+                    fileId = `${Date.now()}-${file.name}`; // Для не-изображений оставляем старый формат
+                }
+
+                reader.onload = (e) => {
+                    uploadedFiles[fileId] = {
+                        name: file.name,
+                        data: e.target.result,
+                        type: file.type,
+                        url: file.type.startsWith('image/') ? URL.createObjectURL(file) : null
+                    };
+
+                    // Добавляем в соответствующее поле
+                    if (isImage) {
+                        targetTextarea.value += `\n<img src="${fileId}" alt="${file.name}">`;
+                    } else if (file.type === acceptType) {
+                        targetTextarea.value += `\n${e.target.result}`;
+                    }
+
+                    // Добавляем в список загруженных файлов
+                    const mediaItem = document.createElement('div');
+                    mediaItem.className = 'media-item';
+
+                    if (file.type.startsWith('image/')) {
+                        const img = document.createElement('img');
+                        img.src = uploadedFiles[fileId].url;
+                        mediaItem.appendChild(img);
+                    }
+
+                    const nameSpan = document.createElement('span');
+                    nameSpan.textContent = `${file.name} (ID: ${fileId})`;
+                    mediaItem.appendChild(nameSpan);
+
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.textContent = savedLanguage === 'ru' ? 'Удалить' : 'Delete';
+                    deleteBtn.addEventListener('click', () => {
+                        delete uploadedFiles[fileId];
+                        mediaItem.remove();
+                        if (file.type.startsWith('image/')) {
+                            URL.revokeObjectURL(uploadedFiles[fileId].url);
+                        }
+                    });
+                    mediaItem.appendChild(deleteBtn);
+
+                    mediaList.appendChild(mediaItem);
+                };
+
+                if (file.type.startsWith('image/')) {
+                    reader.readAsDataURL(file);
+                } else {
+                    reader.readAsText(file);
+                }
+            });
+            input.value = ''; // Сбрасываем input
+        });
+    }
+
+    // Привязываем загрузку к каждой кнопке
+    if (htmlFileInput && htmlUploadBtn) {
+        handleFileUpload(htmlFileInput, htmlUploadBtn, htmlInput, 'text/html');
+    }
+    if (imageFileInput && imageUploadBtn) {
+        handleFileUpload(imageFileInput, imageUploadBtn, htmlInput, 'image/*', true);
+    }
+    if (cssFileInput && cssUploadBtn) {
+        handleFileUpload(cssFileInput, cssUploadBtn, cssInput, 'text/css');
+    }
+    if (jsFileInput && jsUploadBtn) {
+        handleFileUpload(jsFileInput, jsUploadBtn, jsInput, 'text/javascript');
+    }
+
+    // Логика редактора
     if (runButton && htmlInput && cssInput && jsInput && output && errorMessage) {
-        console.log("Все элементы редактора найдены, скрипт готов");
-
         runButton.addEventListener('click', () => {
-            console.log("Кнопка 'Показать результат' нажата");
             const html = htmlInput.value.trim();
-            console.log("HTML введённый:", `'${html}'`);
-
             if (!html) {
-                console.log("HTML пустой, показываем сообщение об ошибке");
                 errorMessage.textContent = document.documentElement.lang === 'ru' ? "Вы ничего не ввели в HTML" : "You didn't enter anything in HTML";
                 errorMessage.classList.add('show');
-                setTimeout(() => {
-                    errorMessage.classList.remove('show');
-                    console.log("Сообщение об ошибке скрыто через 5 секунд");
-                }, 5000);
+                setTimeout(() => errorMessage.classList.remove('show'), 5000);
                 return;
             }
 
-            console.log("HTML не пустой, обновляем iframe");
             const css = cssInput.value || '';
             const js = jsInput.value || '';
+
+            // Заменяем media://photo-N на актуальные URL
+            let processedHtml = html;
+            for (const [id, file] of Object.entries(uploadedFiles)) {
+                if (file.type.startsWith('image/')) {
+                    processedHtml = processedHtml.replaceAll(id, file.url);
+                }
+            }
+
             const content = `
                 <!DOCTYPE html>
                 <html>
@@ -236,19 +230,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     </style>
                 </head>
                 <body>
-                    ${html}
+                    ${processedHtml}
                     <script>${js}<\/script>
                 </body>
                 </html>
             `;
 
             try {
-                console.log("Попытка обновить iframe");
                 const blob = new Blob([content], { type: 'text/html' });
                 const url = URL.createObjectURL(blob);
                 output.src = url;
                 setTimeout(() => URL.revokeObjectURL(url), 1000);
-                console.log("iframe успешно обновлён");
             } catch (error) {
                 console.error("Ошибка при обновлении iframe:", error);
                 output.srcdoc = '<p style="color: #ff4081;">Ошибка. Проверьте консоль (F12).</p>';
