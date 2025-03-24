@@ -75,5 +75,13 @@
     <button id="themeToggle" class="theme-toggle">☀️</button>
     <div id="error-message" class="error-message" data-ru="Вы ничего не ввели в HTML" data-en="You didn't enter anything in HTML"></div>
     <script defer src="./scripts.js"></script>
+
+    <!-- Блокировка экрана -->
+<div class="block-overlay" id="blockOverlay">
+    <div class="block-message">
+        <p data-ru="Пожалуйста, не обновляйте страницу так часто. Это может навредить работе сайта." data-en="Please do not refresh the page so often. This may harm the site's performance."></p>
+        <p class="timer" id="blockTimer">30</p>
+    </div>
+</div>
 </body>
 </html>
