@@ -623,3 +623,114 @@ body.light-theme .media-item span {
     justify-content: center;
     margin-bottom: 15px;
 }
+
+.editor-upload {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.small-upload-btn {
+    padding: 8px 15px;
+    font-size: 14px;
+    background: linear-gradient(90deg, #00d4ff, #007bff);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.light-theme .small-upload-btn {
+    background: linear-gradient(90deg, #f06292, #d81b60);
+}
+
+.small-upload-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.6);
+}
+
+body.light-theme .small-upload-btn:hover {
+    box-shadow: 0 6px 20px rgba(216, 27, 96, 0.6);
+}
+
+.copy-btn:active {
+    background: linear-gradient(90deg, #00ff7f, #00d4ff); /* Зеленый оттенок при нажатии */
+}
+
+body.light-theme .copy-btn:active {
+    background: linear-gradient(90deg, #ff6f91, #f06292);
+}
+
+.editor {
+    position: relative; /* Для позиционирования кнопки внутри редактора */
+}
+
+.editor-upload {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+}
+
+.small-upload-btn {
+    padding: 8px 15px;
+    font-size: 14px;
+    background: linear-gradient(90deg, #00d4ff, #007bff);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.light-theme .small-upload-btn {
+    background: linear-gradient(90deg, #f06292, #d81b60);
+}
+
+.small-upload-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.6);
+}
+
+body.light-theme .small-upload-btn:hover {
+    box-shadow: 0 6px 20px rgba(216, 27, 96, 0.6);
+}
+
+.copy-btn {
+    position: absolute;
+    right: 10px; /* Отступ от правого края */
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 5px 10px; /* Уменьшенный размер */
+    font-size: 12px; /* Меньший шрифт */
+    background: linear-gradient(90deg, #00d4ff, #007bff);
+    color: white;
+    border: none;
+    border-radius: 15px; /* Чуть меньше радиус */
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.light-theme .copy-btn {
+    background: linear-gradient(90deg, #f06292, #d81b60);
+}
+
+.copy-btn:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.6);
+}
+
+body.light-theme .copy-btn:hover {
+    box-shadow: 0 4px 15px rgba(216, 27, 96, 0.6);
+}
+
+.copy-btn:active {
+    background: linear-gradient(90deg, #00ff7f, #00d4ff);
+}
+
+body.light-theme .copy-btn:active {
+    background: linear-gradient(90deg, #ff6f91, #f06292);
+}
