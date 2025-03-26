@@ -21,6 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const jsUploadBtn = document.getElementById('jsUploadBtn');
     const mediaList = document.getElementById('mediaList');
 
+    // Кнопки копирования
+    const htmlCopyBtn = document.getElementById('htmlCopyBtn');
+    const cssCopyBtn = document.getElementById('cssCopyBtn');
+    const jsCopyBtn = document.getElementById('jsCopyBtn');
+
     // Объект для хранения загруженных файлов и счетчик изображений
     let uploadedFiles = {};
     let imageCounter = 0;
@@ -102,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     imageCounter++;
                     fileId = `media://photo-${imageCounter}`;
                 } else {
-                    fileId = `${Date.now()}-${file.name}`; // Для не-изображений оставляем старый формат
+                    fileId = `${Date.now()}-${file.name}`;
                 }
 
                 reader.onload = (e) => {
@@ -113,14 +118,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         url: file.type.startsWith('image/') ? URL.createObjectURL(file) : null
                     };
 
-                    // Добавляем в соответствующее поле
                     if (isImage) {
                         targetTextarea.value += `\n<img src="${fileId}" alt="${file.name}">`;
                     } else if (file.type === acceptType) {
                         targetTextarea.value += `\n${e.target.result}`;
                     }
 
-                    // Добавляем в список загруженных файлов
                     const mediaItem = document.createElement('div');
                     mediaItem.className = 'media-item';
 
@@ -154,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     reader.readAsText(file);
                 }
             });
-            input.value = ''; // Сбрасываем input
+            input.value = '';
         });
     }
 
@@ -172,6 +175,30 @@ document.addEventListener('DOMContentLoaded', () => {
         handleFileUpload(jsFileInput, jsUploadBtn, jsInput, 'text/javascript');
     }
 
+    // Функция копирования текста
+    function copyToClipboard(textarea, button) {
+        button.addEventListener('click', () => {
+            const text = textarea.value;
+            navigator.clipboard.writeText(text).then(() => {
+                // Визуальная обратная связь
+                button.textContent = savedLanguage === 'ru' ? 'Скопировано!' : 'Copied!';
+                setTimeout(() => {
+                    button.textContent = savedLanguage === 'ru' ? '❐' : '❐';
+                }, 2000);
+            }).catch(err => {
+                console.error('Ошибка копирования:', err);
+                errorMessage.textContent = savedLanguage === 'ru' ? 'Ошибка при копировании' : 'Copy error';
+                errorMessage.classList.add('show');
+                setTimeout(() => errorMessage.classList.remove('show'), 5000);
+            });
+        });
+    }
+
+    // Привязываем копирование к каждой кнопке
+    if (htmlCopyBtn) copyToClipboard(htmlInput, htmlCopyBtn);
+    if (cssCopyBtn) copyToClipboard(cssInput, cssCopyBtn);
+    if (jsCopyBtn) copyToClipboard(jsInput, jsCopyBtn);
+
     // Логика редактора
     if (runButton && htmlInput && cssInput && jsInput && output && errorMessage) {
         runButton.addEventListener('click', () => {
@@ -186,7 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const css = cssInput.value || '';
             const js = jsInput.value || '';
 
-            // Заменяем media://photo-N на актуальные URL
             let processedHtml = html;
             for (const [id, file] of Object.entries(uploadedFiles)) {
                 if (file.type.startsWith('image/')) {
