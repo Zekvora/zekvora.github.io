@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const text = textarea.value;
             navigator.clipboard.writeText(text).then(() => {
                 // Визуальная обратная связь
-                button.textContent = savedLanguage === 'ru' ? 'Скопировано!' : 'Copied!';
+                button.textContent = savedLanguage === 'ru' ? '❐!' : '❐!';
                 setTimeout(() => {
                     button.textContent = savedLanguage === 'ru' ? '❐' : '❐';
                 }, 2000);
