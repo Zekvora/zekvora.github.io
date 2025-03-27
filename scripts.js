@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const cssCopyBtn = document.getElementById('cssCopyBtn');
     const jsCopyBtn = document.getElementById('jsCopyBtn');
 
+    // Кнопки сохранения
+    const saveButtons = document.querySelectorAll('.save-btn');
+
     // Объект для хранения загруженных файлов и счетчик изображений
     let uploadedFiles = {};
     let imageCounter = 0;
@@ -180,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const text = textarea.value;
             navigator.clipboard.writeText(text).then(() => {
-                // Визуальная обратная связь
                 button.textContent = savedLanguage === 'ru' ? '❐!' : '❐!';
                 setTimeout(() => {
                     button.textContent = savedLanguage === 'ru' ? '❐' : '❐';
@@ -273,4 +275,42 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Логика сохранения файлов
+    saveButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const textarea = button.closest('.editor').querySelector('textarea');
+            const code = textarea.value.trim();
+            const fileType = button.dataset.type;
+            let fileName, mimeType;
+
+            switch (fileType) {
+                case 'html':
+                    fileName = 'zekvora_code.html';
+                    mimeType = 'text/html';
+                    break;
+                case 'css':
+                    fileName = 'zekvora_styles.css';
+                    mimeType = 'text/css';
+                    break;
+                case 'js':
+                    fileName = 'zekvora_script.js';
+                    mimeType = 'text/javascript';
+                    break;
+                default:
+                    fileName = 'zekvora_code.txt';
+                    mimeType = 'text/plain';
+            }
+
+            const blob = new Blob([code], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        });
+    });
 });
