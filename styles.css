@@ -734,3 +734,33 @@ body.light-theme .copy-btn:hover {
 body.light-theme .copy-btn:active {
     background: linear-gradient(90deg, #ff6f91, #f06292);
 }
+
+/* Существующие стили остаются без изменений, добавляем в конец файла: */
+
+.save-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    background: linear-gradient(90deg, #00d4ff, #007bff);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.light-theme .save-btn {
+    background: linear-gradient(90deg, #f06292, #d81b60);
+}
+
+.save-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.6);
+}
+
+body.light-theme .save-btn:hover {
+    box-shadow: 0 4px 15px rgba(216, 27, 96, 0.6);
+}
+
