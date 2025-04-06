@@ -764,3 +764,10 @@ body.light-theme .save-btn:hover {
     box-shadow: 0 4px 15px rgba(216, 27, 96, 0.6);
 }
 
+@media (max-width: 768px) and (orientation: portrait) {
+    .theme-toggle {
+        bottom: calc(15px + env(safe-area-inset-bottom));
+        right: calc(15px + env(safe-area-inset-right));
+    }
+}
+
